@@ -1,19 +1,9 @@
-function editNav() {
-  let x = document.getElementById('myTopnav');
-  if (x.className === 'topnav') {
-    x.className += ' responsive';
-  } else {
-    x.className = 'topnav';
-  }
-}
-
 const modalbg = document.querySelector('.bground');
 const FormModalBtn = document.querySelectorAll('.form-modal-btn');
 const closeFormModalBtn = document.querySelectorAll('.close');
-const formData = document.querySelectorAll('.formData');
 const modalConfirmation = document.querySelector('.confirmation-bground');
 const closeConfirmationModalBtn = document.querySelectorAll(
-  '.close-confirmation'
+  '.close-confirmation',
 );
 
 const launchFormModal = () => {
@@ -35,13 +25,9 @@ const launchConfirmationModal = () => {
 
 FormModalBtn.forEach((btn) => btn.addEventListener('click', launchFormModal));
 
-closeFormModalBtn.forEach((btn) =>
-  btn.addEventListener('click', closeFormModal)
-);
+closeFormModalBtn.forEach((btn) => btn.addEventListener('click', closeFormModal));
 
-closeConfirmationModalBtn.forEach((btn) =>
-  btn.addEventListener('click', closeConfirmationModal)
-);
+closeConfirmationModalBtn.forEach((btn) => btn.addEventListener('click', closeConfirmationModal));
 
 const first = document.querySelector('#first');
 const firstError = document.querySelector('#first-error');

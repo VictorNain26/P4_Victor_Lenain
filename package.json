@@ -1,0 +1,12 @@
+{
+  "name": "GameOn-website-FR",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/VictorNain26/P4_Lenain_Victor",
+  "author": "victor lenain <victor.lenain26@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^15.0.0"
+  }
+}
