@@ -33,7 +33,9 @@ const first = document.querySelector('#first');
 const firstError = document.querySelector('#first-error');
 
 first.addEventListener('input', () => {
-  if (/^[a-z ,.'-]+$/i.test(first.value)) {
+  const firstValueTrim = first.value.trim();
+
+  if (/^[a-z ,.'-]+$/i.test(firstValueTrim) && firstValueTrim.length >= 2) {
     firstError.style.display = 'none';
     first.classList.remove('invalid-input');
   } else {
@@ -46,7 +48,9 @@ const last = document.querySelector('#last');
 const lastError = document.querySelector('#last-error');
 
 last.addEventListener('input', () => {
-  if (/^[a-z ,.'-]+$/i.test(last.value)) {
+  const lastValueTrim = last.value.trim();
+
+  if (/^[a-z ,.'-]+$/i.test(lastValueTrim) && lastValueTrim.length >= 2) {
     lastError.style.display = 'none';
     last.classList.remove('invalid-input');
   } else {
@@ -74,9 +78,12 @@ email.addEventListener('input', () => {
 
 const birthdate = document.querySelector('#birthdate');
 const birthdateError = document.querySelector('#birthdate-error');
+const dateNow = new Date();
+const dateNowParse = new Date(dateNow.setFullYear(dateNow.getFullYear() - 10))
 
 birthdate.addEventListener('input', () => {
-  if (new Date(birthdate.value) < new Date('2011-01-01')) {
+
+  if (new Date(birthdate.value) < dateNowParse && new Date(birthdate.value) > new Date('1930/01/01')) {
     birthdateError.style.display = 'none';
     birthdate.classList.remove('invalid-input');
   } else {
@@ -128,17 +135,19 @@ const validate = () => {
   event.preventDefault();
   const form = document.querySelector('#form');
   const checkedRadioBtn = document.querySelectorAll("input[type='radio']:checked");
+  const firstValueTrim = first.value.trim();
+  const lastValueTrim = last.value.trim();
 
   if (
     !checkedRadioBtn.length ||
     !checkboxBtn.checked ||
     !(quantity.value < 50) ||
-    !(new Date(birthdate.value) < new Date('2011-01-01')) ||
+    !new Date(birthdate.value) < dateNowParse && new Date(birthdate.value) > new Date('1930/01/01') ||
     !/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
       email.value
     ) ||
-    !/^[a-z ,.'-]+$/i.test(last.value) ||
-    !/^[a-z ,.'-]+$/i.test(first.value)
+    (!/^[a-z ,.'-]+$/i.test(lastValueTrim) && lastValueTrim.length >= 2) ||
+    (!/^[a-z ,.'-]+$/i.test(firstValueTrim) && firstValueTrim.length >= 2)
   ) {
     checkedRadioBtn.length
       ? (errorRadio.style.display = 'none')
@@ -152,7 +161,7 @@ const validate = () => {
       ? (quantityError.style.display = 'none')
       : (quantityError.style.display = 'block');
 
-    new Date(birthdate.value) < new Date('2011-01-01')
+      new Date(birthdate.value) < dateNowParse && new Date(birthdate.value) > new Date('1930/01/01')
       ? (birthdateError.style.display = 'none')
       : (birthdateError.style.display = 'block');
 
@@ -162,11 +171,11 @@ const validate = () => {
       ? (emailError.style.display = 'none')
       : (emailError.style.display = 'block');
 
-    /^[a-z ,.'-]+$/i.test(last.value)
+    /^[a-z ,.'-]+$/i.test(lastValueTrim) && lastValueTrim.length >= 2
       ? (lastError.style.display = 'none')
       : (lastError.style.display = 'block');
 
-    /^[a-z ,.'-]+$/i.test(first.value)
+    /^[a-z ,.'-]+$/i.test(firstValueTrim) && firstValueTrim.length >= 2
       ? (firstError.style.display = 'none')
       : (firstError.style.display = 'block');
 
