@@ -1,3 +1,16 @@
+const x = document.getElementById('myTopnav');
+function editNav() {
+  if (x.className === 'topnav') {
+    x.className += ' responsive';
+  } else {
+    x.className = 'topnav';
+  }
+}
+const nav = document.getElementById('nav');
+nav.addEventListener('click', () => {
+  editNav();
+});
+
 const modalbg = document.querySelector('.bground');
 const FormModalBtn = document.querySelectorAll('.form-modal-btn');
 const closeFormModalBtn = document.querySelectorAll('.close');
@@ -64,8 +77,8 @@ const emailError = document.querySelector('#email-error');
 
 email.addEventListener('input', () => {
   if (
-    /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
-      email.value
+    /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i.test(
+      email.value,
     )
   ) {
     emailError.style.display = 'none';
@@ -79,10 +92,9 @@ email.addEventListener('input', () => {
 const birthdate = document.querySelector('#birthdate');
 const birthdateError = document.querySelector('#birthdate-error');
 const dateNow = new Date();
-const dateNowParse = new Date(dateNow.setFullYear(dateNow.getFullYear() - 10))
+const dateNowParse = new Date(dateNow.setFullYear(dateNow.getFullYear() - 10));
 
 birthdate.addEventListener('input', () => {
-
   if (new Date(birthdate.value) < dateNowParse && new Date(birthdate.value) > new Date('1930/01/01')) {
     birthdateError.style.display = 'none';
     birthdate.classList.remove('invalid-input');
@@ -108,14 +120,14 @@ quantity.addEventListener('input', () => {
 const allRadioBtn = document.querySelectorAll("input[type='radio']");
 const errorRadio = document.querySelector('#error-radio');
 
-allRadioBtn.forEach(item => {
+allRadioBtn.forEach((item) => {
   item.addEventListener('click', () => {
     const checkedRadioBtn = document.querySelectorAll("input[type='radio']:checked");
 
     if (checkedRadioBtn.length) {
       errorRadio.style.display = 'none';
     }
-  })
+  });
 });
 
 const checkboxBtn = document.querySelector('#checkbox1');
@@ -133,59 +145,80 @@ checkboxBtn.addEventListener('click', () => {
 
 const validate = () => {
   event.preventDefault();
+  const errors = document.querySelectorAll('.error');
   const form = document.querySelector('#form');
   const checkedRadioBtn = document.querySelectorAll("input[type='radio']:checked");
+  const radioBtn = document.querySelectorAll("input[type='radio']");
   const firstValueTrim = first.value.trim();
   const lastValueTrim = last.value.trim();
 
-  if (
-    !checkedRadioBtn.length ||
-    !checkboxBtn.checked ||
-    !(quantity.value < 50) ||
-    !new Date(birthdate.value) < dateNowParse && new Date(birthdate.value) > new Date('1930/01/01') ||
-    !/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
-      email.value
-    ) ||
-    (!/^[a-z ,.'-]+$/i.test(lastValueTrim) && lastValueTrim.length >= 2) ||
-    (!/^[a-z ,.'-]+$/i.test(firstValueTrim) && firstValueTrim.length >= 2)
-  ) {
-    checkedRadioBtn.length
-      ? (errorRadio.style.display = 'none')
-      : (errorRadio.style.display = 'block');
-
-    checkboxBtn.checked
-      ? (errorCheckbox.style.display = 'none')
-      : (errorCheckbox.style.display = 'block');
-
-    quantity.value < 50
-      ? (quantityError.style.display = 'none')
-      : (quantityError.style.display = 'block');
-
-      new Date(birthdate.value) < dateNowParse && new Date(birthdate.value) > new Date('1930/01/01')
-      ? (birthdateError.style.display = 'none')
-      : (birthdateError.style.display = 'block');
-
-    /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
-      email.value
-    )
-      ? (emailError.style.display = 'none')
-      : (emailError.style.display = 'block');
-
-    /^[a-z ,.'-]+$/i.test(lastValueTrim) && lastValueTrim.length >= 2
-      ? (lastError.style.display = 'none')
-      : (lastError.style.display = 'block');
-
-    /^[a-z ,.'-]+$/i.test(firstValueTrim) && firstValueTrim.length >= 2
-      ? (firstError.style.display = 'none')
-      : (firstError.style.display = 'block');
-
-    return false;
+  if (checkedRadioBtn.length) {
+    errorRadio.style.display = 'none';
+    radioBtn[0].classList.remove('error');
   } else {
+    errorRadio.style.display = 'block';
+    radioBtn[0].classList.add('error');
+  }
+
+  if (checkboxBtn.checked) {
+    errorCheckbox.style.display = 'none';
+    checkboxBtn.classList.remove('error');
+  } else {
+    errorCheckbox.style.display = 'block';
+    checkboxBtn.classList.add('error');
+  }
+
+  if (quantity.value < 50) {
+    quantityError.style.display = 'none';
+    quantity.classList.remove('error');
+  } else {
+    quantityError.style.display = 'block';
+    quantity.classList.add('error');
+  }
+
+  if (new Date(birthdate.value) < dateNowParse && new Date(birthdate.value) > new Date('1930/01/01')) {
+    birthdateError.style.display = 'none';
+    birthdate.classList.remove('error');
+  } else {
+    birthdateError.style.display = 'block';
+    birthdate.classList.add('error');
+  }
+
+  if (/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i.test(email.value)) {
+    emailError.style.display = 'none';
+    email.classList.remove('error');
+  } else {
+    emailError.style.display = 'block';
+    email.classList.add('error');
+  }
+
+  if (/^[a-z ,.'-]+$/i.test(lastValueTrim) && lastValueTrim.length >= 2) {
+    lastError.style.display = 'none';
+    last.classList.remove('error');
+  } else {
+    lastError.style.display = 'block';
+    last.classList.add('error');
+  }
+
+  if (/^[a-z ,.'-]+$/i.test(firstValueTrim) && firstValueTrim.length >= 2) {
+    firstError.style.display = 'none';
+    first.classList.remove('error');
+  } else {
+    firstError.style.display = 'block';
+    first.classList.add('error');
+  }
+
+  if (errors.length === 0) {
     modalbg.style.display = 'none';
     errorRadio.style.display = 'none';
     errorCheckbox.style.display = 'none';
     form.reset();
-
     launchConfirmationModal();
   }
 };
+
+const submitBtn = document.querySelector('#submit-button');
+
+submitBtn.addEventListener('click', () => {
+  validate();
+});
