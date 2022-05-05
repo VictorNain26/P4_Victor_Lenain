@@ -143,9 +143,8 @@ checkboxBtn.addEventListener('click', () => {
   }
 });
 
-const validate = () => {
+const validate = (event) => {
   event.preventDefault();
-  const errors = document.querySelectorAll('.error');
   const form = document.querySelector('#form');
   const checkedRadioBtn = document.querySelectorAll("input[type='radio']:checked");
   const radioBtn = document.querySelectorAll("input[type='radio']");
@@ -208,6 +207,8 @@ const validate = () => {
     first.classList.add('error');
   }
 
+  const errors = document.querySelectorAll('.error');
+
   if (errors.length === 0) {
     modalbg.style.display = 'none';
     errorRadio.style.display = 'none';
@@ -219,6 +220,6 @@ const validate = () => {
 
 const submitBtn = document.querySelector('#submit-button');
 
-submitBtn.addEventListener('click', () => {
-  validate();
+submitBtn.addEventListener('click', (e) => {
+  validate(e);
 });
