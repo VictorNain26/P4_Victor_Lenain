@@ -11,6 +11,8 @@ nav.addEventListener('click', () => {
   editNav();
 });
 
+// Open close form modal
+
 const modalbg = document.querySelector('.bground');
 const FormModalBtn = document.querySelectorAll('.form-modal-btn');
 const closeFormModalBtn = document.querySelectorAll('.close');
@@ -41,6 +43,8 @@ FormModalBtn.forEach((btn) => btn.addEventListener('click', launchFormModal));
 closeFormModalBtn.forEach((btn) => btn.addEventListener('click', closeFormModal));
 
 closeConfirmationModalBtn.forEach((btn) => btn.addEventListener('click', closeConfirmationModal));
+
+// Form validation with input
 
 const first = document.querySelector('#first');
 const firstError = document.querySelector('#first-error');
@@ -143,6 +147,8 @@ checkboxBtn.addEventListener('click', () => {
   }
 });
 
+// Form Validation when click on submit
+
 const validate = (event) => {
   event.preventDefault();
   const form = document.querySelector('#form');
@@ -153,58 +159,72 @@ const validate = (event) => {
 
   if (checkedRadioBtn.length) {
     errorRadio.style.display = 'none';
+    radioBtn[0].classList.remove('invalid-input');
     radioBtn[0].classList.remove('error');
   } else {
     errorRadio.style.display = 'block';
     radioBtn[0].classList.add('error');
+    radioBtn[0].classList.add('invalid-input');
   }
 
   if (checkboxBtn.checked) {
     errorCheckbox.style.display = 'none';
+    checkboxBtn.classList.remove('invalid-input');
     checkboxBtn.classList.remove('error');
   } else {
     errorCheckbox.style.display = 'block';
     checkboxBtn.classList.add('error');
+    checkboxBtn.classList.add('invalid-input');
   }
 
   if (quantity.value < 50) {
     quantityError.style.display = 'none';
+    quantity.classList.remove('invalid-input');
     quantity.classList.remove('error');
   } else {
     quantityError.style.display = 'block';
     quantity.classList.add('error');
+    quantity.classList.add('invalid-input');
   }
 
   if (new Date(birthdate.value) < dateNowParse && new Date(birthdate.value) > new Date('1930/01/01')) {
     birthdateError.style.display = 'none';
+    birthdate.classList.remove('invalid-input');
     birthdate.classList.remove('error');
   } else {
     birthdateError.style.display = 'block';
     birthdate.classList.add('error');
+    birthdate.classList.add('invalid-input');
   }
 
   if (/^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i.test(email.value)) {
     emailError.style.display = 'none';
+    email.classList.remove('invalid-input');
     email.classList.remove('error');
   } else {
     emailError.style.display = 'block';
     email.classList.add('error');
+    email.classList.add('invalid-input');
   }
 
   if (/^[a-z ,.'-]+$/i.test(lastValueTrim) && lastValueTrim.length >= 2) {
     lastError.style.display = 'none';
     last.classList.remove('error');
+    last.classList.remove('invalid-input');
   } else {
     lastError.style.display = 'block';
     last.classList.add('error');
+    last.classList.add('invalid-input');
   }
 
   if (/^[a-z ,.'-]+$/i.test(firstValueTrim) && firstValueTrim.length >= 2) {
     firstError.style.display = 'none';
     first.classList.remove('error');
+    first.classList.remove('invalid-input');
   } else {
     firstError.style.display = 'block';
     first.classList.add('error');
+    first.classList.add('invalid-input');
   }
 
   const errors = document.querySelectorAll('.error');
