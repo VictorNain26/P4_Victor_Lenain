@@ -112,7 +112,7 @@ const quantity = document.querySelector('#quantity');
 const quantityError = document.querySelector('#quantity-error');
 
 quantity.addEventListener('input', () => {
-  if (quantity.value < 50) {
+  if (quantity.value < 50 && quantity.value >= 0 && Number(quantity.value) > 0) {
     quantityError.style.display = 'none';
     quantity.classList.remove('invalid-input');
   } else {
@@ -177,7 +177,7 @@ const validate = (event) => {
     checkboxBtn.classList.add('invalid-input');
   }
 
-  if (quantity.value < 50) {
+  if (quantity.value < 50 && quantity.value >= 0 && typeof quantity.value === 'number') {
     quantityError.style.display = 'none';
     quantity.classList.remove('invalid-input');
     quantity.classList.remove('error');
