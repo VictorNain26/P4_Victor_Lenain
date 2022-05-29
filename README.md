@@ -12,4 +12,4 @@ Ce projet est le n°4 du parcours [**Développeur Front-End**](https://openclass
 5. Effectuer des tests manuels.
 
 ### Informations complémentaires
-- Lien vers le site : [Cliquez-ici](https://victornain26.github.io/P4_Lenain_Victor/ "Cliquez-ici").
+- Lien vers le site : [Cliquez-ici](https://victornain26.github.io/P4_Victor_Lenain/ "Cliquez-ici").
