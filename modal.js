@@ -177,7 +177,7 @@ const validate = (event) => {
     checkboxBtn.classList.add('invalid-input');
   }
 
-  if (quantity.value < 50 && quantity.value >= 0 && typeof quantity.value === 'number') {
+  if (quantity.value < 50 && quantity.value >= 0 && Number(quantity.value) > 0) {
     quantityError.style.display = 'none';
     quantity.classList.remove('invalid-input');
     quantity.classList.remove('error');
